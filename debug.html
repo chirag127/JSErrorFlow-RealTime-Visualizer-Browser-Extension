@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Error Visualizer Debug</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .instructions {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    .error-btn {
+      padding: 10px 15px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .debug-section {
+      margin-top: 30px;
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Error Visualizer Debug Page</h1>
+  
+  <div class="instructions">
+    <h2>Instructions</h2>
+    <p>This page will help debug the JavaScript Error Visualizer extension. Follow these steps:</p>
+    <ol>
+      <li>Open your browser's developer console (F12 or Ctrl+Shift+I)</li>
+      <li>Look for any error messages related to the extension</li>
+      <li>Click the "Trigger Test Error" button below</li>
+      <li>Check if the extension is capturing and highlighting the error</li>
+    </ol>
+  </div>
+  
+  <button id="error-btn" class="error-btn">Trigger Test Error</button>
+  
+  <div class="debug-section">
+    <h2>Extension Status</h2>
+    <div id="extension-status">Checking extension status...</div>
+    
+    <h2>Content Script Check</h2>
+    <div id="content-script-check">Checking if content script is loaded...</div>
+  </div>
+  
+  <script>
+    // Function to check if the extension is working
+    function checkExtension() {
+      const statusElement = document.getElementById('extension-status');
+      const contentScriptElement = document.getElementById('content-script-check');
+      
+      // Check if window.__JEV_EXTENSION_LOADED__ is defined (we'll add this in our content script)
+      if (window.__JEV_EXTENSION_LOADED__) {
+        statusElement.innerHTML = '<span style="color: green;">✓ Extension detected!</span>';
+        contentScriptElement.innerHTML = '<span style="color: green;">✓ Content script is loaded!</span>';
+      } else {
+        statusElement.innerHTML = '<span style="color: red;">✗ Extension not detected. Make sure it\'s installed and enabled.</span>';
+        contentScriptElement.innerHTML = '<span style="color: red;">✗ Content script is not loaded.</span>';
+        
+        // Add a global variable that the content script can detect if it loads later
+        window.__JEV_DEBUG_PAGE__ = true;
+      }
+    }
+    
+    // Add event listener to the error button
+    document.getElementById('error-btn').addEventListener('click', function() {
+      try {
+        // Intentionally cause an error
+        const nullObject = null;
+        nullObject.nonExistentProperty = 'This will cause an error';
+      } catch (e) {
+        // Re-throw to make it an uncaught error
+        throw new Error('Test error from debug page');
+      }
+    });
+    
+    // Set a timeout to check for the extension after the page loads
+    setTimeout(checkExtension, 1000);
+  </script>
+</body>
+</html>

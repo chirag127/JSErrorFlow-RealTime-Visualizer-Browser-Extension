@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Error Visualizer</title>
+    <link rel="icon" href="dist/assets/icons/icon16.png" type="image/png">
+    <style>
+        :root {
+            /* Color Variables */
+            --primary-color: #4a90e2;
+            --primary-dark: #3a7bc8;
+            --accent-color: #e74c3c;
+            --accent-dark: #c0392b;
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --border-color: #333333;
+            
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            
+            /* Border Radius */
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+            
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        /* Header Styles */
+        header {
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: var(--spacing-sm);
+        }
+        
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-xs);
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .header-buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-normal);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(74, 144, 226, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: var(--spacing-xl) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        section:last-of-type {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            margin: var(--spacing-xs) auto 0;
+            border-radius: var(--border-radius-sm);
+        }
+        
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .feature-card {
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            transition: var(--transition-normal);
+            border: 1px solid var(--border-color);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-color);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+        
+        /* Installation Section */
+        .installation-steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            margin-bottom: var(--spacing-md);
+            padding: var(--spacing-md);
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius-md);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: var(--spacing-sm);
+        }
+        
+        /* How to Use Section */
+        .usage-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .usage-item {
+            margin-bottom: var(--spacing-md);
+            padding-left: var(--spacing-md);
+            border-left: 2px solid var(--primary-color);
+        }
+        
+        /* Tech Stack Section */
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .tech-item {
+            background-color: var(--bg-card);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            transition: var(--transition-normal);
+        }
+        
+        .tech-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer Styles */
+        footer {
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            background-color: var(--bg-card);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+        
+        .footer-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--spacing-sm);
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tech-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        section {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        /* Code Snippet Styling */
+        pre {
+            background-color: #2d2d2d;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            overflow-x: auto;
+            margin: var(--spacing-md) 0;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #e6e6e6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <img src="dist/assets/icons/icon128.png" alt="JavaScript Error Visualizer Logo" class="logo">
+            </div>
+            <div class="header-content">
+                <h1>JavaScript Error Visualizer</h1>
+                <p class="tagline">Visually highlight DOM elements associated with JavaScript errors for faster debugging</p>
+                <div class="header-buttons">
+                    <a href="https://github.com/chirag127/JavaScript-Error-Visualizer-browser-extension" class="btn btn-primary" target="_blank">GitHub Repository</a>
+                    <a href="privacy-policy.html" class="btn btn-secondary" target="_blank">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <p>JavaScript Error Visualizer is a browser extension that significantly improves the JavaScript debugging experience for web developers by providing immediate visual feedback directly on the webpage, pinpointing the DOM elements associated with runtime JavaScript errors.</p>
+                <p>No more context-switching between the webpage and the browser's developer console. See exactly where errors are occurring and get detailed information with just a glance.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">Visual Error Highlighting</h3>
+                    <p>Automatically highlights DOM elements associated with JavaScript errors directly on the webpage.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">Comprehensive Error Capture</h3>
+                    <p>Captures uncaught exceptions, unhandled promise rejections, and optionally console.error messages.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3 class="feature-title">Source Map Integration</h3>
+                    <p>Translates stack traces from minified/transpiled code back to the original source code.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3 class="feature-title">Detailed Error Information</h3>
+                    <p>Provides tooltips with error messages and source information when hovering over highlighted elements.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3 class="feature-title">Error Management Panel</h3>
+                    <p>Lists all captured errors with filtering and search capabilities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Customizable Highlighting</h3>
+                    <p>Allows users to customize the highlight style (color, border style, opacity).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="installation">
+        <div class="container">
+            <h2 class="section-title">Installation</h2>
+            <div class="installation-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h3>Clone the Repository</h3>
+                    <pre><code>git clone https://github.com/chirag127/JavaScript-Error-Visualizer-browser-extension.git</code></pre>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h3>Install Dependencies</h3>
+                    <pre><code>cd JavaScript-Error-Visualizer-browser-extension
+npm install</code></pre>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h3>Build the Extension</h3>
+                    <pre><code>npm run build</code></pre>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <h3>Load the Extension in Your Browser</h3>
+                    <p><strong>Chrome/Edge:</strong> Go to <code>chrome://extensions/</code>, enable Developer mode, click "Load unpacked", and select the <code>dist</code> folder.</p>
+                    <p><strong>Firefox:</strong> Go to <code>about:debugging#/runtime/this-firefox</code>, click "Load Temporary Add-on", and select any file in the <code>dist</code> folder.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="usage">
+        <div class="container">
+            <h2 class="section-title">How to Use</h2>
+            <div class="usage-content">
+                <div class="usage-item">
+                    <h3>Enable/Disable</h3>
+                    <p>Click the extension icon and use the toggle switch to enable or disable the extension.</p>
+                </div>
+                <div class="usage-item">
+                    <h3>View Errors</h3>
+                    <p>When an error occurs, the associated DOM element will be highlighted on the page. Click the extension icon to see a list of all errors.</p>
+                </div>
+                <div class="usage-item">
+                    <h3>Error Details</h3>
+                    <p>Click on an error in the list to see detailed information, including the full stack trace.</p>
+                </div>
+                <div class="usage-item">
+                    <h3>Navigate to Elements</h3>
+                    <p>Click on the element links in the error details to scroll to and flash the highlighted element on the page.</p>
+                </div>
+                <div class="usage-item">
+                    <h3>Clear Errors</h3>
+                    <p>Use the "Clear All" button to remove all error highlights and reset the error list.</p>
+                </div>
+                <div class="usage-item">
+                    <h3>Settings</h3>
+                    <p>Click the "Settings" button to access the extension settings, where you can customize the highlight style, domain settings, and more.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="tech-stack">
+        <div class="container">
+            <h2 class="section-title">Technology Stack</h2>
+            <div class="tech-list">
+                <div class="tech-item">JavaScript (ES6+)</div>
+                <div class="tech-item">Chrome Extension API</div>
+                <div class="tech-item">Source Map</div>
+                <div class="tech-item">Webpack</div>
+                <div class="tech-item">Babel</div>
+                <div class="tech-item">Jest</div>
+                <div class="tech-item">HTML5 & CSS3</div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/chirag127/JavaScript-Error-Visualizer-browser-extension" class="footer-link" target="_blank">GitHub Repository</a>
+                <a href="privacy-policy.html" class="footer-link" target="_blank">Privacy Policy</a>
+            </div>
+            <p class="copyright">&copy; 2023-2025 JavaScript Error Visualizer. Created by Chirag Singhal.</p>
+        </div>
+    </footer>
+</body>
+</html>
