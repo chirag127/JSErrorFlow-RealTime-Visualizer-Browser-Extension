@@ -23,8 +23,20 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["js/contentScript.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/contentScript.js",
+        "js/modules/errorCapturer.js",
+        "js/modules/sourceMapper.js",
+        "js/modules/elementIdentifier.js",
+        "js/modules/highlighter.js",
+        "js/modules/settingsManager.js",
+        "js/modules/utils.js",
+        "js/settings.js",
+        "js/popup.js"
+      ],
       "run_at": "document_start"
     }
   ],
@@ -38,8 +50,12 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["assets/css/tooltip.css"],
-      "matches": ["<all_urls>"]
+      "resources": [
+        "assets/css/tooltip.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ],
   "options_ui": {
