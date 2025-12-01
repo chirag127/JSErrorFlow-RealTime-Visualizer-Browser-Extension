@@ -1,20 +1,42 @@
-# General
+# Node.js
 node_modules/
+
+# Production
+.env
 dist/
-coverage/
+build/
+
+# IDE / Editor
+.idea/
+.vscode/
+*.iml
+*.log
+
+# System Files
 .DS_Store
 
-# IDE / Editor specific
-.vscode/
-.idea/
-*.iml
-*.swp
+# WXT (Web Extension Toolkit)
+.wxt/
+wxt.config.ts
 
-# Build artifacts
-*.log
-*.tmp
-*.temp
+# Tauri
+tauri.conf.json
+target/
 
-# Testing specific
+# Biome/ESLint Cache
+.biome/
+.eslintcache
+
+# Package Manager Specific
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Local Development
+.temp/
+
+# Playwright
 playwright-report/
-vitest.cache/
+
+# Other
+coverage/
