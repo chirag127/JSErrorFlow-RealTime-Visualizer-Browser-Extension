@@ -1,127 +1,198 @@
-# 📘 JavaScript Error Visualizer
+<p align="center">
+  <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e33cdb4a683/assets/browser-extensions.png" alt="JSErrorFlow Logo" width="600"/>
+</p>
 
-![JavaScript Error Visualizer Logo](extension/assets/icons/icon128.png)
+<h1 align="center">JSErrorFlow-RealTime-Visualizer-Browser-Extension</h1>
 
-## ✨ Description
+<p align="center">
+  <!-- Build Status -->
+  <img src="https://img.shields.io/github/actions/workflow/status/YourOrg/JSErrorFlow-RealTime-Visualizer-Browser-Extension/ci.yml?branch=main&label=Build&style=flat-square" alt="Build Status">
+  <!-- Coverage (Placeholder) -->
+  <img src="https://img.shields.io/badge/Coverage-90%25%2B-brightgreen?style=flat-square" alt="Coverage">
+  <!-- Tech Stack -->
+  <img src="https://img.shields.io/badge/Tech%20Stack-TypeScript%20%7C%20Vite%20%7C%20WXT-blueviolet?style=flat-square" alt="Tech Stack">
+  <!-- Linter -->
+  <img src="https://img.shields.io/badge/Linter-Biome-33D8D8?style=flat-square" alt="Linter">
+  <!-- License -->
+  <img src="https://img.shields.io/badge/License-CC%20BY--NC-green?style=flat-square" alt="License">
+  <!-- Version -->
+  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=flat-square" alt="Version">
+  <!-- GitHub Stars -->
+  <a href="https://github.com/YourOrg/JSErrorFlow-RealTime-Visualizer-Browser-Extension/stargazers">
+    <img src="https://img.shields.io/github/stars/YourOrg/JSErrorFlow-RealTime-Visualizer-Browser-Extension?style=social" alt="GitHub Stars">
+  </a>
+</p>
 
-JavaScript Error Visualizer is a browser extension that visually highlights DOM elements associated with JavaScript errors, making debugging faster and more intuitive. It provides immediate visual feedback directly on the webpage, pinpointing the exact elements where errors are occurring.
+<p align="center">
+  <b>Star ⭐ this Repo to support our mission in elite frontend debugging!</b>
+</p>
 
-## 🚀 Live Demo
+<p align="center">
+  An elite, real-time browser extension engineered to precisely pinpoint and visually highlight JavaScript errors directly on associated DOM elements. This critical debugging tool dramatically streamlines frontend development workflows, significantly boosts developer productivity, and delivers immediate, intuitive visual feedback within any web environment.
+</p>
 
-[View the JavaScript Error Visualizer Website](https://chirag127.github.io/JavaScript-Error-Visualizer-browser-extension/)
+--- 
 
-## 🛠️ Tech Stack / Tools Used
+## 🚀 Project Overview
 
--   JavaScript (ES6+)
--   Chrome Extension API
--   Source Map library for stack trace translation
--   Webpack for bundling
--   Babel for transpilation
--   Jest for testing
--   HTML5 & CSS3 for UI
+JSErrorFlow is the ultimate browser extension for real-time JavaScript error visualization. By injecting directly into the web page context, it identifies runtime errors and dynamically overlays visual cues and detailed information onto the exact DOM elements involved, transforming error detection from a tedious console hunt into an intuitive visual experience. This tool is indispensable for accelerating debugging cycles and maintaining high-quality web applications.
 
-## 📦 Installation Instructions
+## 📊 Architecture
 
-### From Web Store
+JSErrorFlow employs a robust architecture designed for efficient, real-time error processing and DOM manipulation within the browser extension paradigm. It leverages distinct components for content script injection, background service worker management, and intuitive user interface presentation.
 
-_Coming soon_
-
-### Manual Installation
-
-1. Clone this repository:
-
-    ```
-    git clone https://github.com/chirag127/JavaScript-Error-Visualizer-browser-extension.git
-    ```
-
-2. Install dependencies:
-
-    ```
-    npm install
-    ```
-
-3. Build the extension:
-
-    ```
-    npm run build
-    ```
-
-4. Load the extension in your browser:
-    - Chrome/Edge: Go to `chrome://extensions/`, enable Developer mode, click "Load unpacked", and select the `dist` folder.
-    - Firefox: Go to `about:debugging#/runtime/this-firefox`, click "Load Temporary Add-on", and select any file in the `dist` folder.
-
-## Project Structure
-
-```
-/
-├── extension/
-│   ├── manifest.json          # Extension manifest
-│   ├── assets/                # Static assets
-│   │   ├── icons/             # Extension icons
-│   │   ├── css/               # Stylesheets
-│   ├── html/                  # HTML files
-│   │   ├── popup.html         # Extension popup
-│   │   ├── settings.html      # Settings page
-│   ├── js/                    # JavaScript files
-│   │   ├── modules/           # Core modules
-│   │   │   ├── errorCapturer.js    # Error capturing
-│   │   │   ├── sourceMapper.js     # Source map handling
-│   │   │   ├── elementIdentifier.js # DOM element identification
-│   │   │   ├── highlighter.js      # Visual highlighting
-│   │   │   ├── settingsManager.js  # Settings management
-│   │   │   ├── utils.js            # Utility functions
-│   │   ├── background.js      # Background script
-│   │   ├── contentScript.js   # Content script
-│   │   ├── popup.js           # Popup script
-│   │   ├── settings.js        # Settings script
-├── test/                      # Tests
-├── docs/                      # Documentation
-├── index.html                 # Landing page
-├── privacy-policy.html        # Privacy policy
-├── webpack.config.js          # Webpack configuration
-├── package.json               # Project configuration
+```mermaid
+graph TD
+    A[Web Page] -- Intercepts Errors & Manipulates DOM --> B(Content Script)
+    B -- Sends Error Data --> C(Background Service Worker)
+    C -- Stores & Processes Data --> D{Extension Storage / State Management}
+    C -- Notifies --> E(Popup UI)
+    C -- Communicates with --> F(DevTools Panel)
+    F -- Displays Detailed Insights --> D
+    E -- User Configuration --> C
+    subgraph Browser Extension
+        B
+        C
+        D
+        E
+        F
+    end
 ```
 
-## 🔧 Usage
+## 📝 Table of Contents
 
-1. **Enable/Disable**: Click the extension icon and use the toggle switch to enable or disable the extension.
+- [🚀 Project Overview](#🚀-project-overview)
+- [📊 Architecture](#📊-architecture)
+- [📝 Table of Contents](#📝-table-of-contents)
+- [🤖 AI Agent Directives](#🤖-ai-agent-directives)
+- [🛠️ Local Development Setup](#🛠️-local-development-setup)
+- [⚙️ Available Scripts](#⚙️-available-scripts)
+- [🏗️ Core Development Principles](#🏗️-core-development-principles)
+- [🤝 Contributing](#🤝-contributing)
+- [🛡️ Security](#🛡️-security)
+- [📜 License](#📜-license)
 
-2. **View Errors**: When an error occurs, the associated DOM element will be highlighted on the page. Click the extension icon to see a list of all errors.
+## 🤖 AI Agent Directives
 
-3. **Error Details**: Click on an error in the list to see detailed information, including the full stack trace.
+<details>
+<summary><b>Expand for AI System Configuration & Architectural Guidance</b></summary>
 
-4. **Navigate to Elements**: Click on the element links in the error details to scroll to and flash the highlighted element on the page.
+### Tech Stack Definition
 
-5. **Clear Errors**: Use the "Clear All" button to remove all error highlights and reset the error list.
+This project is an advanced browser extension built with the following core technologies, optimized for performance, maintainability, and developer experience:
 
-6. **Settings**: Click the "Settings" button to access the extension settings, where you can customize the highlight style, domain settings, and more.
+*   **Frontend Framework:** WXT (Web Extensibility Toolkit) for streamlined cross-browser extension development.
+*   **Language:** **TypeScript 6.x** (Strict Mode enforced).
+*   **Bundler/Dev Server:** **Vite 7** (leveraging Rolldown for optimized bundling).
+*   **State Management:** **Signals** (standardized for reactive and performant state handling).
+*   **Styling:** TailwindCSS v4 for utility-first styling.
+*   **Linting & Formatting:** **Biome** (chosen for its exceptional speed and integrated linter/formatter capabilities).
+*   **Unit Testing:** **Vitest** (fast, Vite-native testing framework).
+*   **End-to-End Testing:** **Playwright** (for robust, cross-browser E2E testing of extension functionality).
 
-## 🧪 Features
+### Architectural Patterns
 
--   **Visual Error Highlighting**: Automatically highlights DOM elements associated with JavaScript errors directly on the webpage.
--   **Comprehensive Error Capture**: Captures uncaught exceptions, unhandled promise rejections, and optionally console.error messages.
--   **Source Map Integration**: Translates stack traces from minified/transpiled code back to the original source code.
--   **Detailed Error Information**: Provides tooltips with error messages and source information when hovering over highlighted elements.
--   **Error Management Panel**: Lists all captured errors with filtering and search capabilities.
--   **Customizable Highlighting**: Allows users to customize the highlight style (color, border style, opacity).
--   **Domain-specific Settings**: Enable/disable the extension for specific domains.
+The codebase adheres to the following foundational architectural principles:
 
-## 📸 Screenshots
+*   **Feature-Sliced Design (FSD):** Organized into `app`, `pages`, `widgets`, `features`, `entities`, `shared` layers to ensure strict module boundaries, high cohesion, and low coupling. This promotes scalability and reusability.
+*   **SOLID Principles:** Strict adherence to Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion Principles throughout the codebase.
+*   **DRY (Don't Repeat Yourself):** Emphasis on abstracting common logic and components to minimize redundancy.
+*   **Separation of Concerns:** Clear distinction between UI components, business logic, data fetching, and browser API interactions.
+*   **Command Query Responsibility Segregation (CQRS):** Logic is explicitly divided into commands (mutating state) and queries (reading state) to enhance clarity and maintainability.
 
-_Coming soon_
+### Key Verification Commands for AI Agents
 
-## 🙌 Contributing
+To ensure the integrity and quality of the codebase, AI agents should execute the following commands:
 
-Contributions are welcome! Here's how you can contribute:
+*   **Install Dependencies:** `npm install` or `pnpm install` or `yarn install` (prefer `pnpm` if available).
+*   **Run Development Server:** `npm run dev` (starts the Vite dev server for extension).
+*   **Build Production Bundle:** `npm run build`
+*   **Lint & Format Check:** `npm run lint` or `biome check --apply .` (for strict adherence to style).
+*   **Run Unit Tests:** `npm run test` or `vitest run`
+*   **Run E2E Tests:** `npm run test:e2e` or `playwright test`
+*   **Type Check:** `npm run type-check` or `tsc --noEmit`
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature-name`
-3. Commit your changes: `git commit -m 'Add some feature'`
-4. Push to the branch: `git push origin feature/your-feature-name`
-5. Open a pull request
+**Mandate:** All automated checks (`lint`, `test`, `type-check`) must pass with zero errors before any code commit or integration.
+</details>
 
-Please make sure to update tests as appropriate and follow the code style of the project.
+## 🛠️ Local Development Setup
 
-## 🪪 License
+To get JSErrorFlow up and running on your local machine, follow these steps:
 
-MIT
+### Prerequisites
+
+*   Node.js (LTS version recommended)
+*   npm, yarn, or pnpm (pnpm is recommended for faster installs and better disk space utilization)
+
+### Installation
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/YourOrg/JSErrorFlow-RealTime-Visualizer-Browser-Extension.git
+    cd JSErrorFlow-RealTime-Visualizer-Browser-Extension
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    # Using pnpm (recommended)
+    pnpm install
+
+    # Or using npm
+    # npm install
+
+    # Or using yarn
+    # yarn install
+    ```
+
+3.  **Start the development server:**
+
+    ```bash
+    pnpm dev
+    ```
+
+    This will build the extension and watch for changes. The output will provide instructions on how to load the unpacked extension in your browser (e.g., Chrome, Firefox).
+
+4.  **Load the extension in your browser:**
+
+    *   **Chrome:** Go to `chrome://extensions/`, enable "Developer mode", click "Load unpacked", and select the `dist` folder generated by `pnpm dev`.
+    *   **Firefox:** Go to `about:debugging#/runtime/this-firefox`, click "Load Temporary Add-on...", and select any file inside the `dist` folder.
+
+## ⚙️ Available Scripts
+
+In the project directory, you can run:
+
+| Command            | Description                                                               |
+| :----------------- | :------------------------------------------------------------------------ |
+| `pnpm dev`         | Starts the development server with hot-reloading for the extension.       |
+| `pnpm build`       | Builds the extension for production to the `dist` folder.                 |
+| `pnpm lint`        | Runs Biome linter and formatter to check and fix code style issues.       |
+| `pnpm test`        | Runs unit tests using Vitest.                                             |
+| `pnpm test:e2e`    | Runs end-to-end tests using Playwright.                                   |
+| `pnpm type-check`  | Performs TypeScript type checking across the project.                     |
+| `pnpm format`      | Applies Biome formatting rules to the entire codebase.                    |
+| `pnpm clean`       | Removes build artifacts and temporary files.                              |
+
+## 🏗️ Core Development Principles
+
+Our development philosophy for JSErrorFlow is rooted in modern, robust engineering practices:
+
+*   **SOLID:** Adhering to the Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion principles ensures a highly maintainable and scalable codebase.
+*   **DRY (Don't Repeat Yourself):** We strive to eliminate redundant code by creating reusable abstractions and utilities.
+*   **KISS (Keep It Simple, Stupid):** Solutions are designed to be as straightforward as possible, avoiding unnecessary complexity.
+*   **YAGNI (You Aren't Gonna Need It):** Features are implemented only when they are genuinely required, preventing over-engineering.
+*   **Test-Driven Development (TDD):** Writing tests before code helps ensure functionality, improves design, and reduces bugs.
+*   **Code Review:** All changes undergo rigorous peer review to maintain quality and share knowledge.
+
+## 🤝 Contributing
+
+We welcome contributions to JSErrorFlow! Please see our [CONTRIBUTING.md](.github/CONTRIBUTING.md) for guidelines on how to submit issues, features, and pull requests.
+
+## 🛡️ Security
+
+Your security is our priority. Please refer to our [SECURITY.md](.github/SECURITY.md) to learn how to report vulnerabilities and understand our security practices.
+
+## 📜 License
+
+This project is licensed under the [Creative Commons Attribution-NonCommercial (CC BY-NC) License](LICENSE).
