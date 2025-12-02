@@ -1,101 +1,98 @@
-# 🚀 Contributing to JSErrorFlow
+# 🤝 Contributing to JSErrorFlow-Real-Time-Visualizer-Browser-Extension
 
-We welcome contributions to `JSErrorFlow-RealTime-Visualizer-Browser-Extension`! As an elite, high-velocity project, we adhere to stringent standards to ensure maintainability, scalability, and zero-defect quality.
+Thank you for considering contributing to the JSErrorFlow-Real-Time-Visualizer-Browser-Extension project! We welcome any contributions that help improve the project's quality, functionality, and reach.
 
-## 📜 Code of Conduct
+## 🌟 Project Philosophy & Standards
 
-This project adheres to the Contributor Covenant Code of Conduct. Please review the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) file for details on expected behavior.
+This project adheres to the Apex Technical Authority's principles of **Zero-Defect, High-Velocity, Future-Proof** development. All contributions should reflect these standards, aiming for professional-grade code, comprehensive testing, and clear documentation.
 
-## 🛠️ Development Environment Setup
+## 🚀 Getting Started
 
-This project uses modern web technologies and follows the **Apex Toolchain** for browser extensions. Ensure you have the following installed:
+### 1. Prerequisites
 
-1.  **Node.js:** LTS version (preferably 20.x or later).
-2.  **npm/yarn/pnpm:** A package manager. We recommend `npm`.
+*   **Git:** Installed and configured. ([Git Documentation](https://git-scm.com/doc))
+*   **Node.js:** Latest LTS version recommended. ([Node.js Website](https://nodejs.org/))
+*   **npm/Yarn/pnpm:** Package manager. We recommend using `pnpm` for efficiency.
+*   **Extension Development Environment:** Familiarity with browser extension development for Chrome/Firefox.
 
-Clone the repository:
+### 2. Setting Up Your Development Environment
 
-```bash
-git clone https://github.com/your-username/JSErrorFlow-RealTime-Visualizer-Browser-Extension.git
-cd JSErrorFlow-RealTime-Visualizer-Browser-Extension
-```
+To get started, clone the repository and install dependencies:
 
-Install dependencies:
+bash
+# Clone the repository
+git clone git@github.com:chirag127/JSErrorFlow-Real-Time-Visualizer-Browser-Extension.git
+cd JSErrorFlow-Real-Time-Visualizer-Browser-Extension
 
-```bash
-npm install
-```
+# Install dependencies (using pnpm is recommended)
+pnpm install
 
-## 🏃 Running the Extension Locally
 
-This project uses **WXT** for building browser extensions, enabling easy local development.
+### 3. Running the Extension Locally
 
-**Development Server:**
+Our build process is managed by Vite. You can start a development server to see your changes in real-time:
 
-```bash
-npm run dev
-```
+bash
+# Start the development server
+pnpm dev
 
-This command will typically start a local development server and provide instructions on how to load the unpacked extension into your browser (Chrome, Firefox, Edge, etc.). Follow the prompts from WXT.
 
-## 📝 Contribution Workflow
+This command will typically build the extension and prepare it for loading into your browser. Refer to the `README.md` for specific instructions on loading the development build into your browser (e.g., Chrome's `chrome://extensions` page).
 
-We follow a strict, iterative workflow to maintain project integrity:
+## 📈 Contribution Workflow
 
-1.  **Fork & Clone:** Fork the repository and clone your fork locally.
-2.  **Branch:** Create a new branch for your feature or fix. Use a descriptive name, e.g., `feat/add-custom-error-filtering` or `fix/dom-element-highlight-bug`.
-3.  **Develop:** Implement your changes. Adhere to the architectural principles outlined in the project's `README.md` and `AGENTS.md`.
-4.  **Lint & Format:** Before committing, run the linter and formatter:
-    ```bash
-    npm run lint -- --fix
-    ```
-    *(Note: This command assumes `lint` script is configured to run Biome. Adjust if necessary.)*
-5.  **Test:** Ensure all tests pass. Running the full test suite locally is highly recommended:
-    ```bash
-    npm run test
-    ```
-    *(Note: This command assumes `test` script is configured to run Vitest.)*
-6.  **Commit:** Use **Conventional Commits** for your messages:
-    *   `feat:` for new features
-    *   `fix:` for bug fixes
-    *   `docs:` for documentation changes
-    *   `style:` for code style (formatting, etc.)
-    *   `refactor:` for refactoring code
-    *   `perf:` for performance improvements
-    *   `test:` for adding/modifying tests
-    *   `chore:` for maintenance tasks
+We follow a standard GitHub pull request workflow:
 
-    Example: `feat(error-highlighting): Improve DOM element selection accuracy`
+1.  **Fork the Repository:** Create your own fork of `chirag127/JSErrorFlow-Real-Time-Visualizer-Browser-Extension`.
+2.  **Create a Branch:** Make a new branch for your feature or bug fix (e.g., `feat/add-new-feature`, `fix/resolve-specific-bug`). Use clear and descriptive branch names.
+    bash
+    git checkout -b your-branch-name
+    
+3.  **Implement Changes:** Make your desired changes. Ensure your code adheres to the project's coding standards and architectural principles (see AGENTS.md for directives).
+4.  **Test Your Changes:** Write unit or integration tests for new functionality and ensure all existing tests pass.
+    bash
+    pnpm test
+    
+5.  **Lint and Format:** Ensure your code is clean and adheres to our linting rules.
+    bash
+    pnpm lint
+    pnpm format
+    
+6.  **Commit Your Changes:** Commit your changes with clear, concise, and conventional commit messages.
+    bash
+    git commit -m "feat: Add descriptive error messages"
+    
+7.  **Push to Your Fork:** Push your branch to your forked repository.
+    bash
+    git push origin your-branch-name
+    
+8.  **Open a Pull Request:** Submit a pull request from your branch to the `main` branch of the `chirag127/JSErrorFlow-Real-Time-Visualizer-Browser-Extension` repository.
 
-7.  **Pull Request (PR):** Submit a PR against the `main` branch of the original repository. Ensure your PR description clearly explains the changes and links to any relevant issues.
+## 🐛 Reporting Bugs
 
-## 📈 Testing Strategy
+If you find a bug, please submit an issue using the **Bug Report** template. Provide as much detail as possible, including:
 
-We maintain a **Comprehensive Testing Strategy** with a target of **100% test coverage** for all critical paths. Contribution tests must:
+*   A clear and concise description of the bug.
+*   Steps to reproduce the bug.
+*   Expected behavior vs. actual behavior.
+*   Browser version and operating system.
+*   Screenshots or screen recordings, if applicable.
+*   Any relevant error messages from the console.
 
-*   **Be Fast:** Run within milliseconds.
-*   **Be Isolated:** Avoid external dependencies; use mocks where necessary.
-*   **Be Repeatable:** Produce deterministic results.
-*   **Cover Scenarios:** Include success, failure, and edge cases.
-*   **Zero Console Errors:** Ensure no console errors occur during test execution.
+## ✨ Suggesting Enhancements
 
-## 🛡️ Security & Best Practices
+We welcome suggestions for new features or improvements. Please submit an issue using the **Feature Request** template. Describe the enhancement and explain why it would be beneficial.
 
-*   **Input Sanitization:** All user inputs and external data must be rigorously sanitized (OWASP Top 10 2025 compliant).
-*   **Zero Trust:** Assume all external interactions are untrusted.
-*   **Fail Fast:** Errors should be caught and handled or thrown immediately.
-*   **No Sensitive Data in Code:** Never commit API keys, secrets, or sensitive configurations directly into the codebase.
+## 📄 Code of Conduct
 
-## 🌟 Code Style & Principles
+This project adheres to a Contributor Covenant Code of Conduct. By participating, you are expected to uphold this code. Please refer to the [CODE_OF_CONDUCT.md](https://github.com/chirag127/JSErrorFlow-Real-Time-Visualizer-Browser-Extension/blob/main/CODE_OF_CONDUCT.md) for more details.
 
-*   **TypeScript Strict Mode:** All TypeScript code must be written with `strict: true` enabled.
-*   **Biome:** We use Biome for linting and formatting. Ensure your code is formatted correctly before committing.
-*   **SOLID & DRY:** Adhere to SOLID principles and the DRY (Don't Repeat Yourself) principle.
-*   **Readability:** Write clear, self-documenting code. Comments are used only to explain the *why*, not the *what*.
-*   **CQS:** Methods should be either Commands (action) or Queries (data), not both.
+## 🤝 Licensing
 
-## 🤝 Seeking Help or Discussing Ideas
+By contributing to this project, you agree that your contributions will be licensed under the **CC BY-NC 4.0 License** ([LICENSE](https://github.com/chirag127/JSErrorFlow-Real-Time-Visualizer-Browser-Extension/blob/main/LICENSE)).
 
-Before submitting a large PR or starting significant new work, please open an issue to discuss your idea. This helps ensure alignment and prevents wasted effort.
+## 🤖 AI Agent Directives
 
-Thank you for contributing to `JSErrorFlow`!
+This project is managed with strict adherence to the AI Agent Directives as defined in [AGENTS.md](https://github.com/chirag127/JSErrorFlow-Real-Time-Visualizer-Browser-Extension/blob/main/AGENTS.md). Ensure your contributions align with the specified architecture, tooling, and quality standards.
+
+---
