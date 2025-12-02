@@ -1,0 +1,47 @@
+build:
+  # GitHub Actions CI/CD
+  - url: https://github.com/chirag127/JSErrorFlow-Real-Time-Visualizer-Browser-Extension/actions/workflows/ci.yml
+    text: Build Status
+    logo: github
+    color: brightgreen
+    style: flat-square
+coverage:
+  # Codecov (Assuming it will be integrated)
+  - url: https://codecov.io/github/chirag127/JSErrorFlow-Real-Time-Visualizer-Browser-Extension
+    text: Coverage
+    logo: codecov
+    color: brightgreen
+    style: flat-square
+tech_stack:
+  # General tech stack indicators
+  - text: TypeScript
+    logo: typescript
+    color: informatiomax
+    style: flat-square
+  - text: Vite
+    logo: vite
+    color: f7b841
+    style: flat-square
+  - text: WXT
+    logo: wxt
+    color: 475891
+    style: flat-square
+lint:
+  # Linter/Formatter status (Assuming Biome integration)
+  - text: Linting
+    logo: biome
+    color: ff9933
+    style: flat-square
+license:
+  # Project License
+  - text: CC BY-NC 4.0
+    logo: creative-commons
+    color: orange
+    style: flat-square
+stars:
+  # GitHub Stars
+  - text: Stars
+    logo: github
+    color: blue
+    style: flat-square
+    url: https://github.com/chirag127/JSErrorFlow-Real-Time-Visualizer-Browser-Extension
