@@ -1,10 +1,60 @@
-node_modules/
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Build artifacts
 dist/
 build/
-.DS_Store
-.env
-.cache/
+*.o
+*.so
+*.a
+*.dll
+*.exe
+
+# Node.js dependencies and modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vite specific files
+.vite/
+
+# WXT specific files
+.wxt/
+
+# Test files
 coverage/
+*.test.js.snap
+*.spec.js.snap
+
+# Log files
 *.log
-*.tmp
-.eslintcache
+
+# OS Specific
+.AppleDouble
+.LSOverride
+._*
+
+# macOS
+.Trashes
+
+# Windows
+pagefile.sys
+swapfile.sys
+hiberfil.sys
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# VS Code specific files
+.vscode/
