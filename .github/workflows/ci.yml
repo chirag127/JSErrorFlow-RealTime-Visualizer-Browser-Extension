@@ -1,56 +1,49 @@
-name: CI
+# .github/workflows/ci.yml
 
-# Controls when the workflow will run
-# For now, it runs on push for the default branch and on pull_request to the default branch
+name: Apex CI/CD Pipeline
+
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+permissions:
+  contents: read
+
 jobs:
-  # This job builds and tests the code on a single runner
-  build_and_test:
-    # The type and version of runner to use
+  build-and-test:
+    name: Build, Lint & Test
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    strategy:
+      matrix:
+        node-version: [20.x]
+
     steps:
-      # Checks-out your repository into the current runner
-      - name: Checkout Repository
+      - name: 1. Checkout Repository
         uses: actions/checkout@v4
 
-      # Setup Node.js environment
-      - name: Setup Node.js
+      - name: 2. Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Use a recent LTS version
-          cache: 'npm' # Cache npm dependencies
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-      # Install dependencies and build the extension
-      - name: Install Dependencies and Build
-        run: |
-          npm ci # Use 'ci' for deterministic installs in CI
-          npm run build
+      - name: 3. Install Dependencies with npm ci
+        run: npm ci
 
-      # Run linters and formatters
-      - name: Lint and Format Check
-        run: npm run lint
+      - name: 4. Lint and Format Check with Biome
+        run: npm run lint:check
 
-      # Run unit tests
-      - name: Run Unit Tests
-        run: npm test
+      - name: 5. Run Unit & Integration Tests with Vitest
+        run: npm test -- --coverage
 
-      # Optional: Upload build artifacts (e.g., for publishing)
-      # - name: Upload Artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: jSErrorFlow-build
-      #     path: dist/ # Adjust path based on your build output directory
+      - name: 6. Upload Coverage Report to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
 
-      # Upload coverage reports if configured (e.g., with Codecov)
-      # - name: Upload Coverage to Codecov
-      #   uses: codecov/codecov-action@v4
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }} # Ensure CODECOV_TOKEN is set in repository secrets
+      - name: 7. Build Production Artifacts
+        run: npm run build
